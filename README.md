@@ -1,98 +1,82 @@
 # NgsolidDevfest
 
-This project was generated using [Nx](https://nx.dev).
+--
+Elewa presentation on Nairobi Devfest 2020
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+--
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+# Installation instructions NgSolid inside of an NX project
 
-## Quick Start & Documentation
+All commands should be executed from root of parent NX project
 
-[Nx Documentation](https://nx.dev/angular)
+## 1. Create all libraries using CLI
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+### 1.1. Node Libraries
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+```
+ng g @nrwl/node:lib external/iote/bricks   
+ng g @nrwl/node:lib external/ngfire/firestore-qbuilder   
+```
 
-## Adding capabilities to your workspace
+### 1.2. Angular Libraries (always pick scss)
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+```
+ng g @nrwl/angular:lib external/iote/bricks-angular
+ng g @nrwl/angular:lib external/iote/ui-workflows
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+ng g @nrwl/angular:lib external/ngfire/angular
+ng g @nrwl/angular:lib external/ngfire/files
+ng g @nrwl/angular:lib external/ngfire/time
+```
 
-Below are our core plugins:
+<i>TODO</i>
+<i>-- ng g @nrwl/node:lib external/ngfire/functions <b>(not yet supported)</b></i>
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+## 2. Delete everything below libs/external
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+````
+rm -r libs/external
+````
 
-## Generate an application
+## 3. Add git submodule and move into external.
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+````
+git submodule add https://github.com/iote/ngsolid-mono
+git mv ngsolid-mono libs/external
+````
+Result should be a folder structure under external which is the same as before 
+<i>(this can sometimes need a couple more git mv's. Important though, never move this folder manually!)</i>
 
-> You can use any of the plugins above to generate applications as well.
+## 4. Link up libraries
+### INSTALL NX PROPERLY USING THE PEER SNIPPETS
+Swap out pathNames
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+<b>In NX root tsconfig.json</b>
+````javascript
+"@proj-name/external/iote/bricks": [ "libs/external/iote/bricks/src/index.ts" ],
+"@proj-name/external/ngfire/firestore-qbuilder": [ "libs/external/ngfire/firestore-qbuilder/src/index.ts" ],
+"@proj-name/external/iote/bricks-angular": [ "libs/external/iote/bricks-angular/src/index.ts" ],
+"@proj-name/external/ngfire/angular": [ "libs/external/ngfire/angular/src/index.ts" ],
+"@proj-name/external/ngfire/time": [ "libs/external/ngfire/time/src/index.ts" ],
+"@proj-name/external/ngfire/files": [ "libs/external/ngfire/files/src/index.ts" ],
+"@proj-name/external/iote/ui-workflows": [ "libs/external/iote/ui-workflows/src/index.ts" ]
+````
 
-## Generate a library
+Change into
+````javascript
+"@iote/bricks": [ "libs/external/iote/bricks/src/index.ts" ],
+"@iote/bricks-angular": [ "libs/external/iote/bricks-angular/src/index.ts" ],
+"@iote/ui-workflows": [ "libs/external/iote/ui-workflows/src/index.ts" ],
+"@ngfire/firestore-qbuilder": [ "libs/external/ngfire/firestore-qbuilder/src/index.ts" ],
+"@ngfire/angular": [ "libs/external/ngfire/angular/src/index.ts" ],
+"@ngfire/time": [ "libs/external/ngfire/time/src/index.ts" ],
+"@ngfire/files": [ "libs/external/ngfire/files/src/index.ts" ]
+````
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+<b>PRO TIP:</b> By playing with this paths array, you can create as many namespaces for your libraries as you wish.
 
-> You can also use any of the plugins above to generate libraries as well.
+## 5. Angular Namespaces
 
-Libraries are sharable across libraries and applications. They can be imported from `@ngsolid-devfest/mylib`.
+In NX root angular.json, look for "prefix": "project-name-new",
 
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+CTRL+F and change this prefix-value to "iote" or "ngfire" depending on the lib. (only for external deps)

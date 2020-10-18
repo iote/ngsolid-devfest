@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "projects": {
+    "ngsolid-devfest": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/ngsolid-devfest",
+      "sourceRoot": "apps/ngsolid-devfest/src",
+      "prefix": "ngsolid-devfest",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ngsolid-devfest",
+            "index": "apps/ngsolid-devfest/src/index.html",
+            "main": "apps/ngsolid-devfest/src/main.ts",
+            "polyfills": "apps/ngsolid-devfest/src/polyfills.ts",
+            "tsConfig": "apps/ngsolid-devfest/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/ngsolid-devfest/src/favicon.ico",
+              "apps/ngsolid-devfest/src/assets"
+            ],
+            "styles": ["apps/ngsolid-devfest/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ngsolid-devfest/src/environments/environment.ts",
+                  "with": "apps/ngsolid-devfest/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngsolid-devfest:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngsolid-devfest:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngsolid-devfest:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/ngsolid-devfest/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/ngsolid-devfest/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ngsolid-devfest-e2e": {
+      "root": "apps/ngsolid-devfest-e2e",
+      "sourceRoot": "apps/ngsolid-devfest-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ngsolid-devfest-e2e/cypress.json",
+            "tsConfig": "apps/ngsolid-devfest-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ngsolid-devfest:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngsolid-devfest:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/ngsolid-devfest-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "ngsolid-devfest"
+}

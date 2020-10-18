@@ -29,6 +29,67 @@
     "ngsolid-devfest-e2e": {
       "tags": [],
       "implicitDependencies": ["ngsolid-devfest"]
+    },
+    "ngsolid-devfest-functions": {
+      "tags": []
+    },
+    "@iote/bricks": {
+      "tags": ["type:types", "scope:bricks"]
+    },
+    "@ngfire/firestore-qbuilder": {
+      "tags": ["type:library", "scope:bricks"],
+      "implicitDependencies": ["@iote/bricks"]
+    },
+    "@iote/bricks-angular": {
+      "tags": ["type:library", "scope:bricks"],
+      "implicitDependencies": ["@iote/bricks"]
+    },
+    "@ngfire/angular": {
+      "tags": ["type:library", "scope:bricks"],
+      "implicitDependencies": [
+        "@iote/bricks",
+        "@iote/bricks-angular",
+        "@ngfire/firestore-qbuilder"
+      ]
+    },
+    "@ngfire/time": {
+      "tags": ["type:library", "scope:bricks"],
+      "implicitDependencies": ["@ngfire/firestore-qbuilder"]
+    },
+    "@ngfire/files": {
+      "tags": ["type:library", "scope:bricks"],
+      "implicitDependencies": ["@iote/bricks"]
+    },
+    "@iote/ui-workflows": {
+      "tags": ["type:library", "scope:bricks"],
+      "implicitDependencies": ["@iote/bricks-angular"]
+    },
+    "@iote/time": {
+      "tags": []
+    },
+    "@iote/cqrs": {
+      "tags": ["type:library", "scope:bricks", "scope:server"],
+      "implicitDependencies": ["@iote/bricks", "@ngfire/firestore-qbuilder"]
+    },
+    "@iote/state": {
+      "tags": []
+    },
+    "@ngfire/admin-data": {
+      "tags": ["type:library", "scope:ngfire", "scope:server"],
+      "implicitDependencies": [
+        "@iote/cqrs",
+        "@iote/bricks",
+        "@ngfire/firestore-qbuilder"
+      ]
+    },
+    "@ngfire/nest": {
+      "tags": ["type:library", "scope:ngfire", "scope:server"],
+      "implicitDependencies": [
+        "@iote/cqrs",
+        "@iote/bricks",
+        "@ngfire/firestore-qbuilder",
+        "@ngfire/admin-data"
+      ]
     }
   }
 }

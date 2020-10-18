@@ -116,6 +116,409 @@
           }
         }
       }
+    },
+    "ngsolid-devfest-functions": {
+      "root": "apps/ngsolid-devfest-functions",
+      "sourceRoot": "apps/ngsolid-devfest-functions/src",
+      "projectType": "application",
+      "prefix": "ngsolid-devfest-functions",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/ngsolid-devfest-functions",
+            "main": "apps/ngsolid-devfest-functions/src/main.ts",
+            "tsConfig": "apps/ngsolid-devfest-functions/tsconfig.app.json",
+            "assets": ["apps/ngsolid-devfest-functions/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/ngsolid-devfest-functions/src/environments/environment.ts",
+                  "with": "apps/ngsolid-devfest-functions/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "ngsolid-devfest-functions:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/ngsolid-devfest-functions/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/ngsolid-devfest-functions/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "@iote/bricks": {
+      "root": "libs/external/iote/bricks",
+      "sourceRoot": "libs/external/iote/bricks/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/iote/bricks/tsconfig.lib.json",
+              "libs/external/iote/bricks/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/external/iote/bricks/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/iote/bricks/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "@iote/time": {
+      "root": "libs/external/iote/time",
+      "sourceRoot": "libs/external/iote/time/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/iote/time/tsconfig.lib.json",
+              "libs/external/iote/time/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/external/iote/time/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/iote/time/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "@iote/bricks-angular": {
+      "projectType": "library",
+      "root": "libs/external/iote/bricks-angular",
+      "sourceRoot": "libs/external/iote/bricks-angular/src",
+      "prefix": "iote",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/iote/bricks-angular/tsconfig.lib.json",
+              "libs/external/iote/bricks-angular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/external/iote/bricks-angular/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/iote/bricks-angular/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@ngfire/angular": {
+      "projectType": "library",
+      "root": "libs/external/ngfire/angular",
+      "sourceRoot": "libs/external/ngfire/angular/src",
+      "prefix": "ngfire",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/ngfire/angular/tsconfig.lib.json",
+              "libs/external/ngfire/angular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/external/ngfire/angular/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/ngfire/angular/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@ngfire/time": {
+      "projectType": "library",
+      "root": "libs/external/ngfire/time",
+      "sourceRoot": "libs/external/ngfire/time/src",
+      "prefix": "ngfire",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/ngfire/time/tsconfig.lib.json",
+              "libs/external/ngfire/time/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/external/ngfire/time/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/ngfire/time/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@ngfire/files": {
+      "projectType": "library",
+      "root": "libs/external/ngfire/files",
+      "sourceRoot": "libs/external/ngfire/files/src",
+      "prefix": "ngfire",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/ngfire/files/tsconfig.lib.json",
+              "libs/external/ngfire/files/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/external/ngfire/files/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/ngfire/files/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@ngfire/firestore-qbuilder": {
+      "projectType": "library",
+      "root": "libs/external/ngfire/firestore-qbuilder",
+      "sourceRoot": "libs/external/ngfire/firestore-qbuilder/src",
+      "prefix": "ngfire",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/ngfire/firestore-qbuilder/tsconfig.lib.json",
+              "libs/external/ngfire/firestore-qbuilder/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/external/ngfire/firestore-qbuilder/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/ngfire/firestore-qbuilder/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@iote/ui-workflows": {
+      "projectType": "library",
+      "root": "libs/external/iote/ui-workflows",
+      "sourceRoot": "libs/external/iote/ui-workflows/src",
+      "prefix": "ngfire",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/iote/ui-workflows/tsconfig.lib.json",
+              "libs/external/iote/ui-workflows/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/external/iote/ui-workflows/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/iote/ui-workflows/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@iote/cqrs": {
+      "root": "libs/external/iote/cqrs",
+      "sourceRoot": "libs/external/iote/cqrs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/iote/cqrs/tsconfig.lib.json",
+              "libs/external/iote/cqrs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/external/iote/cqrs/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/iote/cqrs/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "@iote/state": {
+      "projectType": "library",
+      "root": "libs/external/iote/state",
+      "sourceRoot": "libs/external/iote/state/src",
+      "prefix": "elewa",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/iote/state/tsconfig.lib.json",
+              "libs/external/iote/state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/external/iote/state/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/iote/state/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "@ngfire/admin-data": {
+      "root": "libs/external/ngfire/admin-data",
+      "sourceRoot": "libs/external/ngfire/admin-data/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/ngfire/admin-data/tsconfig.lib.json",
+              "libs/external/ngfire/admin-data/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/external/ngfire/admin-data/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/ngfire/admin-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "@ngfire/nest": {
+      "root": "libs//externalngfire/nest",
+      "sourceRoot": "libs/external/ngfire/nest/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/external/ngfire/nest/tsconfig.lib.json",
+              "libs/external/ngfire/nest/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/external/ngfire/nest/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/external/ngfire/nest/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

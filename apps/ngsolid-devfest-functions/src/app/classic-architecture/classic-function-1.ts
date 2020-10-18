@@ -3,9 +3,10 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 // Local imports
-import { PriceConfig } from './model/price-config.model';
-import { calculatePrice } from './calculate-price';
-import { PriceCalcReqs } from './model/price-calc-reqs.model';
+import { PriceConfig } from '../model/contracts/price-config.model';
+import { PriceCalcReqs } from '../model/contracts/price-calc-reqs.model';
+
+import { calculatePrice } from '../model/calculate-price';
 
 export const calculatePriceOfProspect =
   // Registration

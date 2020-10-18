@@ -1,5 +1,5 @@
-import { PriceCalcReqs } from './model/price-calc-reqs.model';
-import { PriceConfig } from './model/price-config.model';
+import { PriceCalcReqs } from './contracts/price-calc-reqs.model';
+import { PriceConfig } from './contracts/price-config.model';
 
 export function calculatePrice(vars: PriceCalcReqs, pricingConfig: PriceConfig)
 {

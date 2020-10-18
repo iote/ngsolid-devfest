@@ -3,8 +3,8 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 // Local imports
-import { PriceConfig } from './model/price-config.model';
-import { calculatePrice } from './calculate-price';
+import { PriceConfig } from '../model/contracts/price-config.model';
+import { calculatePrice } from '../model/calculate-price';
 
 export const calcPriceHttp =
   // Registration
